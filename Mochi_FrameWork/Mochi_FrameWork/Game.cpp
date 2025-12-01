@@ -3,6 +3,7 @@
 #include "EventQueue.h"
 #include "SceneEventProcessor.h"
 #include "InputManager.h"
+#include "Renderer.h"
 
 // 課題用　後で消す
 #include "KadaiScene.h"
@@ -30,7 +31,9 @@ namespace MochiFramework::Core
 	bool Game::Initialize()
 	{
 		//-- ゲームの初期化処理 --//	
-
+		// 
+		// 描画初期化処理
+		Renderer::Init();
 
 		//-- シーン登録 --//
 		mSceneStack.RegisterScene("KadaiScene", [](FrameworkFacade& f) { return std::make_unique<KadaiScene>(f); });
@@ -40,22 +43,12 @@ namespace MochiFramework::Core
 		return true; // 初期化に成功すればtrueを返す
 	}
 
-	void Game::RunLoop()
-	{
-		while (!ShouldQuit()) // ゲームループ
-		{
-			float deltaTime = 1 / 60; // フレーム時間（ここでは60FPSを想定）
-
-			ProcessInput();				// 入力
-			UpdateGame(deltaTime);		// 更新
-			GenerateOutput();			// 描画
-		}
-	}
-
 	void Game::Shutdown()
 	{
 		//-- ゲームの終了処理 --//
 
+		// 描画終了処理
+		Renderer::Uninit();
 	}
 
 	void Game::ProcessInput()

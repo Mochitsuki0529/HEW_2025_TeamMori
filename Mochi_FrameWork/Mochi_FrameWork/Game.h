@@ -28,20 +28,16 @@ namespace MochiFramework::Core
 		// ===  公開関数（外部インターフェース）  === //
 
 		bool Initialize();	// 初期化
-		void RunLoop();		// ゲームループ
 		void Shutdown();	// 終了時処理
-
-		bool ShouldQuit() const; // 終了フラグの取得
-
-
-	private:
-
-		// ===  補助関数（内部ロジック）  === //
 
 		void ProcessInput();						// 入力
 		void UpdateGame(const float deltaTime);		// 更新
 		void GenerateOutput();						// 描画
 
+		bool ShouldQuit() const; // 終了フラグの取得
+
+
+	private:
 		// ===  メンバ変数（内部変数）  === //
 
 		 // 所有しているシステム
